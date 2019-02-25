@@ -26,9 +26,10 @@ private:
     const string Title = "Logic_Platform";
 	void menu();
 	void lvl_select();
-	void l1(); // poziom 1 ...
+	void l1(); // level 1 ...
 };
 
+/*  // Maybe game will be in future without moveable player
 class Gracz
 {
     public:
@@ -63,5 +64,6 @@ class Gracz
         return true;
     }
 };
+*/
 
 #endif // game_h

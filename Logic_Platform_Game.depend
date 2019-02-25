@@ -419,10 +419,10 @@
 	<Windows.h>
 	<string>
 
-1551106408 source:c:\users\artur\logic_platform_game\game.cpp
+1551122610 source:c:\users\artur\logic_platform_game\game.cpp
 	"game.h"
 
-1551105728 c:\users\artur\logic_platform_game\game.h
+1551122610 c:\users\artur\logic_platform_game\game.h
 	<SFML/Graphics.hpp>
 	<Windows.h>
 	<string>

@@ -63,18 +63,18 @@ void Game::menu()
 	title.setStyle(Text::Bold);
 
 	title.setPosition(1280/2-title.getGlobalBounds().width/2,20);
-
+//////////////////////////////////////////////////////////////////////////////
     window.setMouseCursorVisible(false);
 
 	sf::View fixed = window.getView();
 	sf::Texture cursorTexture;
-	if(!cursorTexture.loadFromFile("Resources/Textures/cursor.png"))
+	if(!cursorTexture.loadFromFile("Resources/Textures/cursor.png"))// Custon Cursor
     {
         MessageBox(NULL,"Cursor not found! Check: 'Resources/Textures/cursor.png'","ERROR",NULL);
 		state = END;
     }
 	sf::Sprite cursor(cursorTexture);
-
+/////////////////////////////////////////////////////////////////////////////
 	const int ile = 3;
 
 	Text tekst[ile];
@@ -83,12 +83,12 @@ void Game::menu()
 	for(int i=0;i<ile;i++)
 	{
 		tekst[i].setFont(font);
-		tekst[i].setCharacterSize(65);
+		tekst[i].setCharacterSize(65);              // Main Menu, texts and buttons
 
 		tekst[i].setString(str[i]);
 		tekst[i].setPosition(1280/2-tekst[i].getGlobalBounds().width/2,250+i*120);
 	}
-
+///////////////////////////////////////////////////////////////////////////////////
 	while(state == MENU)
 	{
 		Vector2f mouse(Mouse::getPosition());
@@ -115,10 +115,10 @@ void Game::menu()
 		}
 		for(int i=0;i<ile;i++)
 			if(tekst[i].getGlobalBounds().contains(mouse))
-				tekst[i].setColor(Color::Cyan);
+				tekst[i].setColor(Color::Cyan); // when you will move your mouse on button
 			else tekst[i].setColor(Color::White);
 
-        cursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
+        cursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window))); // for custom cursor
 
 		window.clear();
 
@@ -275,6 +275,21 @@ void Game::l1()
 	}
     sf::Sprite background(bg_tex);
 
+    sf::Texture leverOFFtexture, leverONtexture;
+    leverOFFtexture.loadFromFile("Resources/Textures/leverOFF2.jpg");
+    leverONtexture.loadFromFile("Resources/Textures/leverON2.jpg");
+    sf::Sprite leverOFF(leverOFFtexture), leverOFF2(leverOFFtexture);
+    sf::Sprite leverON(leverONtexture), leverON2(leverONtexture);
+
+    leverOFF.setPosition(50,50);
+    leverON.setPosition(50,50);
+
+    leverOFF2.setPosition(250,150);
+    leverON2.setPosition(250,150);
+
+    bool leverstage1 = 0;
+    bool leverstage2 = 0;
+
 	while(state == L1)
 	{
 		Vector2f mouse(Mouse::getPosition());
@@ -286,6 +301,21 @@ void Game::l1()
 			if(event.type == Event::Closed || event.type == Event::KeyPressed &&
 				event.key.code == Keyboard::Escape)
 				state = SELECT;
+            if(event.type == sf::Event::KeyPressed && event.key.code == Keyboard::Space)
+            {
+                if (leverstage1 == 0)
+                    leverstage1 = 1;
+                else
+                    leverstage1 = 0;
+            }
+
+            if(leverstage1 == 1 && event.type == sf::Event::KeyPressed && event.key.code == Keyboard::Enter)
+            {
+                if (leverstage2 == 0)
+                    leverstage2 = 1;
+                else
+                    leverstage2 = 0;
+            }
 		}
 
         cursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
@@ -294,6 +324,19 @@ void Game::l1()
 
         window.draw(background);
 		window.draw(title);
+
+		if (leverstage1 == 0)
+            window.draw(leverOFF);
+        else if (leverstage1 == 1)
+            window.draw(leverON);
+
+        if (leverstage1 == 1)
+        {
+            if (leverstage2 == 0)
+                window.draw(leverOFF2);
+            else if (leverstage2 == 1)
+                window.draw(leverON2);
+        }
 
 		window.setView(fixed);
         window.draw(cursor);
