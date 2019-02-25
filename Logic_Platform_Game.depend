@@ -419,3 +419,14 @@
 	<Windows.h>
 	<string>
 
+1551106408 source:c:\users\artur\logic_platform_game\game.cpp
+	"game.h"
+
+1551105728 c:\users\artur\logic_platform_game\game.h
+	<SFML/Graphics.hpp>
+	<Windows.h>
+	<string>
+
+1551047752 source:c:\users\artur\logic_platform_game\main.cpp
+	"game.h"
+

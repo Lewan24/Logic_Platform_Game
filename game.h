@@ -1,7 +1,7 @@
 #ifndef game_h
 #define game_h
 
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <Windows.h>
 #include <string>
 
@@ -17,17 +17,51 @@ public:
 	void runGame();
 
 protected:
-	enum GameState {MENU,GAME,SELECT,END}; // {l1, l2, l3, l4...} ???
+	enum GameState {MENU,SELECT,END,
+                    L1}; // {l1, l2, l3, l4...} ???
 	GameState state;
 
 private:
 	Font font;
     const string Title = "Logic_Platform";
-
 	void menu();
 	void lvl_select();
+	void l1(); // poziom 1 ...
+};
 
-	//void l1(); // poziom 1 ...
+class Gracz
+{
+    public:
+
+    sf::RectangleShape rect;
+    float bottom, left, right, top;
+
+    Gracz(sf::Vector2f position, sf::Vector2f size, sf::Color c1, sf::Color c2, int thi)
+    {
+        rect.setPosition(position);
+        rect.setSize(size);
+        rect.setFillColor(c1);
+        rect.setOutlineColor(c2);
+        rect.setOutlineThickness(thi);
+    }
+
+    void Update()
+    {
+        bottom = rect.getPosition().y + rect.getSize().y;
+        left = rect.getPosition().x;
+        right = rect.getPosition().x + rect.getSize().x;
+        top = rect.getPosition().y;
+    }
+
+    bool Collision(Gracz p)
+    {
+        if (right < p.left || left > p.right ||
+            top > p.bottom || bottom < p.top)
+        {
+            return false;
+        }
+        return true;
+    }
 };
 
 #endif // game_h

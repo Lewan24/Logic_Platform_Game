@@ -2,6 +2,23 @@
 
 RenderWindow window(VideoMode(1280,720),"Logic_Platform",Style::Fullscreen);
 
+/*
+    window.setMouseCursorVisible(false);
+
+	sf::View fixed = window.getView();
+	sf::Texture cursorTexture;
+	if(!cursorTexture.loadFromFile("Resources/Textures/cursor.png"))
+    {
+        MessageBox(NULL,"Cursor not found! Check: 'Resources/Textures/cursor.png'","ERROR",NULL);
+		state = END;
+    }
+	sf::Sprite cursor(cursorTexture);
+
+    cursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window))); // przed 'window.clear();'
+    window.setView(fixed);
+    window.draw(cursor);
+*/
+
 Game::Game(void)
 {
 	state = END;
@@ -33,13 +50,12 @@ void Game::runGame()
 		case SELECT:
 			lvl_select();
 			break;
-        case GAME:
-            //...
+        case L1:
+            l1();
             break;
 		}
 	}
 }
-
 
 void Game::menu()
 {
@@ -47,6 +63,17 @@ void Game::menu()
 	title.setStyle(Text::Bold);
 
 	title.setPosition(1280/2-title.getGlobalBounds().width/2,20);
+
+    window.setMouseCursorVisible(false);
+
+	sf::View fixed = window.getView();
+	sf::Texture cursorTexture;
+	if(!cursorTexture.loadFromFile("Resources/Textures/cursor.png"))
+    {
+        MessageBox(NULL,"Cursor not found! Check: 'Resources/Textures/cursor.png'","ERROR",NULL);
+		state = END;
+    }
+	sf::Sprite cursor(cursorTexture);
 
 	const int ile = 3;
 
@@ -91,12 +118,16 @@ void Game::menu()
 				tekst[i].setColor(Color::Cyan);
 			else tekst[i].setColor(Color::White);
 
+        cursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
+
 		window.clear();
 
 		window.draw(title);
 		for(int i=0;i<ile;i++)
 			window.draw(tekst[i]);
 
+        window.setView(fixed);
+        window.draw(cursor);
 		window.display();
 	}
 }
@@ -107,6 +138,17 @@ void Game::lvl_select()
     title.setStyle(Text::Bold);
 
 	title.setPosition(1280/2-title.getGlobalBounds().width/2,20);
+
+    window.setMouseCursorVisible(false);
+
+	sf::View fixed = window.getView();
+	sf::Texture cursorTexture;
+	if(!cursorTexture.loadFromFile("Resources/Textures/cursor.png"))
+    {
+        MessageBox(NULL,"Cursor not found! Check: 'Resources/Textures/cursor.png'","ERROR",NULL);
+		state = END;
+    }
+	sf::Sprite cursor(cursorTexture);
 
 	const int ile2 = 3;
     Text tekst2[ile2];
@@ -159,7 +201,7 @@ void Game::lvl_select()
             //Wciœniêcie ESC lub przycisk X
 			if(event.type == Event::Closed || event.type == Event::KeyPressed &&
 				event.key.code == Keyboard::Escape)
-				state = END;
+				state = MENU;
 			else if(tekst2[1].getGlobalBounds().contains(mouse) &&  // Menu
 				event.type == Event::MouseButtonReleased && event.key.code == Mouse::Left)
 			{
@@ -173,7 +215,7 @@ void Game::lvl_select()
 			else if(tekst[0].getGlobalBounds().contains(mouse) &&  // level 1
 				event.type == Event::MouseButtonReleased && event.key.code == Mouse::Left)
 			{
-				//state = GAME;
+				state = L1;
 				//TODO: Wymyslic jak przeniesc sie na konkretny poziom
 				// moze zrobic tak, by zaczynalo sie od tutorialu i kontynuowalo o poziom wyzej
 				// w ustawieniach zapisywalo by sie gdzie sie skonczylo, ale jak
@@ -190,6 +232,8 @@ void Game::lvl_select()
 				tekst2[i].setColor(Color::Cyan);
 			else tekst2[i].setColor(Color::White);
 
+        cursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
+
 		window.clear();
 
 		window.draw(title);
@@ -198,6 +242,61 @@ void Game::lvl_select()
         for(int i=0;i<ile2;i++)
 			window.draw(tekst2[i]);
 
+        window.setView(fixed);
+        window.draw(cursor);
+		window.display();
+	}
+}
+
+void Game::l1()
+{
+    Text title(Title,font,50);
+	title.setStyle(Text::Bold);
+    title.setOutlineColor(sf::Color::Blue);
+    title.setOutlineThickness(2);
+	title.setPosition(1280/2-title.getGlobalBounds().width/2,20);
+
+    window.setMouseCursorVisible(false);
+
+	sf::View fixed = window.getView();
+	sf::Texture cursorTexture;
+	if(!cursorTexture.loadFromFile("Resources/Textures/cursor.png"))
+    {
+        MessageBox(NULL,"Cursor not found! Check: 'Resources/Textures/cursor.png'","ERROR",NULL);
+		state = END;
+    }
+	sf::Sprite cursor(cursorTexture);
+
+	sf::Texture bg_tex;
+    if (!bg_tex.loadFromFile("Resources/Textures/floor.png"))
+    {
+		MessageBox(NULL,"Some Resources not found! Check: 'Resources/Textures/floor.png'","ERROR",NULL);
+		state = MENU;
+	}
+    sf::Sprite background(bg_tex);
+
+	while(state == L1)
+	{
+		Vector2f mouse(Mouse::getPosition());
+		Event event;
+
+		while(window.pollEvent(event))
+		{
+			//Wciœniêcie ESC lub przycisk X
+			if(event.type == Event::Closed || event.type == Event::KeyPressed &&
+				event.key.code == Keyboard::Escape)
+				state = SELECT;
+		}
+
+        cursor.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
+
+		window.clear();
+
+        window.draw(background);
+		window.draw(title);
+
+		window.setView(fixed);
+        window.draw(cursor);
 		window.display();
 	}
 }
