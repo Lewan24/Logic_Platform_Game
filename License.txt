@@ -1,5 +1,5 @@
-				Flappy_Ping
-			     Copyright © 2018.
+			      Logic_Platform
+			     Copyright © 2019.
 			    All rights reserved.
 
 ***********	INSTALUJ¥C T¥ APLIKACJÊ PRZYJMUJESZ DO 
@@ -21,7 +21,7 @@
 	POG£ÊBIANIA SWOJEJ WIEDZY ZWI¥ZANEJ Z 
 	PROGRAMOWANIEM.
 
-4.		Flappy_Ping jest rozprowadzany na zasadzie FREEWARE. 
+4.		Logic_Platform jest rozprowadzany na zasadzie FREEWARE. 
 	Oznacza to, ¿e dostajesz go za darmo i mo¿esz u¿ywaæ 
 	w dowolnej iloœci kopii ca³kowicie bez ograniczeñ!
 	Mo¿e on byæ wykorzystywany zarówno w celach 

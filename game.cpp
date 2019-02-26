@@ -276,8 +276,8 @@ void Game::l1()
     sf::Sprite background(bg_tex);
 
     sf::Texture leverOFFtexture, leverONtexture;
-    leverOFFtexture.loadFromFile("Resources/Textures/leverOFF2.jpg");
-    leverONtexture.loadFromFile("Resources/Textures/leverON2.jpg");
+    leverOFFtexture.loadFromFile("Resources/Textures/leverOFF.png");
+    leverONtexture.loadFromFile("Resources/Textures/leverON.png");
     sf::Sprite leverOFF(leverOFFtexture), leverOFF2(leverOFFtexture);
     sf::Sprite leverON(leverONtexture), leverON2(leverONtexture);
 
@@ -290,6 +290,8 @@ void Game::l1()
     bool leverstage1 = 0;
     bool leverstage2 = 0;
 
+    //auto pos = sf::Mouse::getPosition(window);
+
 	while(state == L1)
 	{
 		Vector2f mouse(Mouse::getPosition());
@@ -301,20 +303,21 @@ void Game::l1()
 			if(event.type == Event::Closed || event.type == Event::KeyPressed &&
 				event.key.code == Keyboard::Escape)
 				state = SELECT;
-            if(event.type == sf::Event::KeyPressed && event.key.code == Keyboard::Space)
-            {
-                if (leverstage1 == 0)
-                    leverstage1 = 1;
-                else
-                    leverstage1 = 0;
-            }
-
-            if(leverstage1 == 1 && event.type == sf::Event::KeyPressed && event.key.code == Keyboard::Enter)
+            if(leverOFF2.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y && event.type == sf::Event::MouseButtonPressed && event.key.code == sf::Mouse::Left)
+               || leverON2.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y) && event.type == sf::Event::MouseButtonPressed && event.key.code == sf::Mouse::Left)
             {
                 if (leverstage2 == 0)
                     leverstage2 = 1;
                 else
                     leverstage2 = 0;
+            }
+            if(leverOFF.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y && event.type == sf::Event::MouseButtonPressed && event.key.code == sf::Mouse::Left)
+               || leverON.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y) && event.type == sf::Event::MouseButtonPressed && event.key.code == sf::Mouse::Left)
+            {
+                if (leverstage1 == 0)
+                    leverstage1 = 1;
+                else
+                    leverstage1 = 0;
             }
 		}
 

@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <Windows.h>
 #include <string>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 
 using namespace std;
 using namespace sf;
