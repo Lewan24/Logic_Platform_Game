@@ -1,4 +1,4 @@
-			      Logic_Platform
+			      MindFu**er_Game
 			     Copyright © 2019.
 			    All rights reserved.
 
@@ -21,7 +21,7 @@
 	POG£ÊBIANIA SWOJEJ WIEDZY ZWI¥ZANEJ Z 
 	PROGRAMOWANIEM.
 
-4.		Logic_Platform jest rozprowadzany na zasadzie FREEWARE. 
+4.		MindFu**er_Game jest rozprowadzany na zasadzie FREEWARE. 
 	Oznacza to, ¿e dostajesz go za darmo i mo¿esz u¿ywaæ 
 	w dowolnej iloœci kopii ca³kowicie bez ograniczeñ!
 	Mo¿e on byæ wykorzystywany zarówno w celach 

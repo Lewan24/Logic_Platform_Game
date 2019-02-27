@@ -7,3 +7,9 @@ int main()
 
     return 0;
 }
+
+/**     MindFu**er Game
+  *     Author: Artur Lewandowski
+  *     Developer: Artur Lewandowksi
+  *     Programmer: Artur Lewandowski
+  */
