@@ -295,8 +295,20 @@ void Game::l1()
     leverOFF2.setPosition(250,150);
     leverON2.setPosition(250,150);
 
+    sf::Texture tex_door_closed, tex_door_opened;
+    if (!tex_door_closed.loadFromFile("Resources/Game/door_closed.png"))
+        ErrorMsg("Some Resources not found! Check: 'Resources/Game/door_closed.png'","ERROR");
+    if (!tex_door_opened.loadFromFile("Resources/Game/door_opened.png"))
+        ErrorMsg("Some Resources not found! Check: 'Resources/Game/door_opened.png'","ERROR");
+
+    sf::Sprite door_op(tex_door_opened), door_cl(tex_door_closed);
+
+    door_op.setPosition(320,160);
+    door_cl.setPosition(320,160);
+
     bool leverstage1 = 0;
     bool leverstage2 = 0;
+    bool first_door = 0;
 
     //auto pos = sf::Mouse::getPosition(window);
     //TODO: Odtwarzac dzwiek dxwigni
@@ -325,8 +337,8 @@ void Game::l1()
         }*/
 
         TileMap map;
-        if (!map.load("Resources/Game/Tileset_Test.png", sf::Vector2u(40, 40), level, 32, 18))
-            ErrorMsg("Map not found! Check: 'Resources/Game/Tileset_Test.png'","ERROR");
+        if (!map.load("Resources/Game/Tileset_1.png", sf::Vector2u(40, 40), level, 32, 18))
+            ErrorMsg("Map not found! Check: 'Resources/Game/Tileset_1.png'","ERROR");
 
         while(state == L1)
         {
@@ -366,17 +378,31 @@ void Game::l1()
             window.draw(title);
 
             if (leverstage1 == 0)
+            {
                 window.draw(leverOFF);
+                first_door = 0;
+            }
             else if (leverstage1 == 1)
                 window.draw(leverON);
 
             if (leverstage1 == 1)
             {
                 if (leverstage2 == 0)
+                {
                     window.draw(leverOFF2);
+                    first_door = 0;
+                }
                 else if (leverstage2 == 1)
+                {
                     window.draw(leverON2);
+                    first_door = 1;
+                }
             }
+
+            if (first_door == 1)
+                window.draw(door_op);
+            else
+                window.draw(door_cl);
 
             window.setView(fixed);
             window.draw(cursor);
